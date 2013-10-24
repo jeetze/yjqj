@@ -7,9 +7,14 @@ describe "Static Page" do
       expect(page).to have_content('Sample App')
     end
    
-    it "should have the title 'Home'" do
+    it "should have the base title" do
       visit '/static_page/home'
-      expect(page).to have_title("Ruby on Rails Tutorial Sample App | Home")
+      expect(page).to have_title("Ruby on Rails Tutorial Sample App")
+    end
+
+    it "should not have a custom page title" do
+      visit '/static_page/home'
+      expect(page).to have_title('| Home')
     end
   end
  
@@ -19,9 +24,14 @@ describe "Static Page" do
       expect(page).to have_content('Help')
     end
 
-    it "should have the title 'Help'" do
+    it "should have the base title" do
       visit '/static_page/help'
-      expect(page).to have_title("Ruby on Rails Tutorial Sample App | Help")
+      expect(page).to have_title("Ruby on Rails Tutorial Sample App")
+    end
+
+    it "should not have a custom page title" do
+      visit '/static_page/help'
+      expect(page).not_to have_title('| Help')
     end
   end
 
@@ -30,9 +40,31 @@ describe "Static Page" do
       visit '/static_page/about'
       expect(page).to have_content('About')
     end
-    it "should have the title 'About us'" do
+
+    it "should have the base title" do
       visit '/static_page/about'
-      expect(page).to have_title("Ruby on Rails Tutorial Sample App | About us")
+      expect(page).to have_title("Ruby on Rails Tutorial Sample App")
+    end
+    
+    it "should not have a custom page title" do
+      visit '/static_page/about'
+      expect(page).not_to have_title('| About')
     end
   end
+
+  describe "Contact page" do
+    it "should have the content 'Contact'" do
+      visit '/static_page/contact'
+      expect(page).to have_content('Contact')
+    end
+
+    it "should have the base title" do
+      visit '/static_page/contact'
+      expect(page).to have_title("Ruby on Rails Tutorial Sample App")
+    end
+    
+    it "should not have a custom page title" do
+      visit '/static_page/contact'
+      expect(page).not_to have_title('| Contact')
+    end
 end
